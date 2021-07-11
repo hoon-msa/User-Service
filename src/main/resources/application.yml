@@ -1,0 +1,15 @@
+server:
+  port: 0 # 0일 경우 random port 사용하겠다는거임.
+
+spring:
+  application:
+    name: user-service  # eureka dashboard에 이 이름이 대문자로 표시됨.
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}  # random port 했을 때 인스턴스 아이디 한개 잡히는거 해결
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka # eureka라는 end point에 현재 가지고있는 마이크로서비스 정보 등록.
